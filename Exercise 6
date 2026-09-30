@@ -1,0 +1,173 @@
+Import java.util.Scanner;
+
+Interface BankAccount i
+
+
+    Void deposit(double amount);
+
+    Void withdraw(double amount) throws InsufficientBalanceException;
+
+    Void checkBalance();
+
+}
+
+Class InsufficientBalanceException extends Exception {
+
+    Public InsufficientBalanceException(String message) {
+
+        Super(message);
+
+    }
+
+}
+
+Class Bank implements BankAccount {
+
+    String name;
+
+    Int accountNumber;
+
+    Double balance;
+
+    Bank(String name, int accountNumber, double balance) {
+
+        This.name = name;
+
+        This.accountNumber = accountNumber;
+
+        This.balance = balance;
+
+    }
+
+    Public void deposit(double amount) {
+
+        If (amount <= 0) {
+
+            System.out.println(“Exception: Invalid Deposit Amount”);
+
+            Return;
+
+        }
+
+        Balance = balance + amount;
+
+        System.out.println(“Amount Deposited Successfully”);
+
+        System.out.println(“Available Balance: Rs. “ + balance);
+
+    }
+
+    Public void withdraw(double amount) throws InsufficientBalanceException {
+
+        If (amount <= 0) {
+
+            Throw new InsufficientBalanceException(“Invalid Withdraw Amount”);
+
+        }
+
+        If (amount > balance) {
+
+            Throw new InsufficientBalanceException(“Insufficient Balance”);
+
+        }
+
+        Balance = balance – amount;
+
+        System.out.println(“Amount Withdrawn Successfully”);
+
+        System.out.println(“Available Balance: Rs. “ + balance);
+
+    }
+
+    Public void checkBalance() {
+
+        System.out.println(“Available Balance: Rs. “ + balance);
+
+    }
+
+}
+
+Public class main {
+
+    Public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println(“===== BANK ACCOUNT OPERATIONS =====”);
+
+        System.out.print(“Account Holder Name: “);
+
+        String name = sc.nextLine();
+
+        System.out.print(“Account Number: “);
+
+        Int accountNumber = sc.nextInt();
+
+        System.out.print(“Initial Balance: “);
+
+        Double balance = sc.nextDouble();
+
+        Bank account = new Bank(name, accountNumber, balance);
+
+        System.out.println(“\n1. Deposit”);
+
+        System.out.println(“2. Withdraw”);
+
+        System.out.println(“3. Balance Enquiry”);
+
+        System.out.print(“Enter your choice: “);
+
+        Int choice = sc.nextInt();
+
+        Try {
+
+            Switch (choice) {
+
+                Case 1:
+
+                    System.out.print(“Deposit Amount: “);
+
+                    Double depositAmount = sc.nextDouble();
+
+                    Account.deposit(depositAmount);
+
+                    Break;
+
+                Case 2:
+
+                    System.out.print(“Withdraw Amount: “);
+
+                    Double withdrawAmount = sc.nextDouble();
+
+                    Account.withdraw(withdrawAmount);
+
+                    Break;
+
+                Case 3:
+
+                    Account.checkBalance();
+
+                    Break;
+
+                Default:
+
+                    System.out.println(“Exception: Invalid Choice”);
+
+            }
+
+        }
+
+        Catch (InsufficientBalanceException e) {
+
+            System.out.println(“Exception: “ + e.getMessage());
+
+            System.out.println(“Transaction Failed”);
+
+            System.out.println(“Available Balance: Rs. “ + account.balance);
+
+        }
+
+        Sc.close();
+
+    }
+}
