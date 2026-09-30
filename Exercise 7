@@ -1,0 +1,28 @@
+import java.io.*;
+
+class Ex7 {
+    public static void main(String[] args) {
+        int data;
+
+        String source = "source.txt";
+        String destination = "destination.txt";
+
+        try {
+            FileInputStream fis = new FileInputStream(source);
+            FileOutputStream fos = new FileOutputStream(destination);
+
+            while ((data = fis.read()) != -1) {
+                fos.write(data);
+            }
+
+            fis.close();
+            fos.close();
+        }
+        catch (Exception e) {
+            System.out.println("File not found");
+        }
+        finally {
+            System.out.println("File copied successfully");
+        }
+    }
+}
